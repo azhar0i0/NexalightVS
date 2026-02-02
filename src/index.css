@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nexalight Virtual Solutions Design System
+   Color Philosophy: Teal primary for trust & freshness, 
+   neutral grays for professionalism, white for clarity
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Primary - Teal #01ABAB */
+    --primary: 180 99% 34%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 18%;
+    
+    /* Surface - Light Gray #F3F4F6 */
+    --surface: 220 14% 96%;
+    
+    /* Cards */
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 18%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 18%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 180 99% 34%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 180 99% 34%;
+
+    --radius: 0.5rem;
+
+    /* Text hierarchy */
+    --text-primary: 220 13% 10%;
+    --text-secondary: 220 9% 46%;
+    --text-muted: 220 9% 60%;
+
+    /* Sidebar (keeping for compatibility) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 180 99% 34%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 13% 18%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 180 99% 34%;
+  }
+
+  .dark {
+    --background: 220 13% 10%;
+    --foreground: 220 14% 96%;
+
+    --card: 220 13% 14%;
+    --card-foreground: 220 14% 96%;
+
+    --popover: 220 13% 14%;
+    --popover-foreground: 220 14% 96%;
+
+    --primary: 180 99% 40%;
+    --primary-foreground: 220 13% 10%;
+
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 220 14% 96%;
+
+    --muted: 220 13% 18%;
+    --muted-foreground: 220 9% 60%;
+
+    --accent: 180 99% 40%;
+    --accent-foreground: 220 13% 10%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 220 14% 96%;
+
+    --border: 220 13% 20%;
+    --input: 220 13% 20%;
+    --ring: 180 99% 40%;
+
+    --sidebar-background: 220 13% 10%;
+    --sidebar-foreground: 220 14% 96%;
+    --sidebar-primary: 180 99% 40%;
+    --sidebar-primary-foreground: 220 13% 10%;
+    --sidebar-accent: 220 13% 18%;
+    --sidebar-accent-foreground: 220 14% 96%;
+    --sidebar-border: 220 13% 20%;
+    --sidebar-ring: 180 99% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  /* Human-crafted animation timing - NOT default eases */
+  .ease-human {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .ease-material {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ========================================
+     MICRO-INTERACTIONS (Subtle & Intentional)
+     ======================================== */
+
+  /* Subtle hover lift - buttons, cards */
+  .hover-lift {
+    @apply transition-all duration-150;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Interactive card hover */
+  .card-hover {
+    @apply transition-all duration-150;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -8px hsl(var(--foreground) / 0.08);
+  }
+
+  /* Link underline animation */
+  .link-hover {
+    @apply relative;
+  }
+
+  .link-hover::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[1px] bg-current;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-hover:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Button press effect - haptic feel (120ms) */
+  .press-effect {
+    @apply transition-transform;
+    transition-duration: 120ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .press-effect:active {
+    transform: scale(0.98);
+  }
+
+  /* Gentle opacity shift on hover */
+  .opacity-hover {
+    @apply transition-opacity duration-150;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .opacity-hover:hover {
+    opacity: 0.8;
+  }
+
+  /* Scale hover - very subtle */
+  .scale-hover {
+    @apply transition-transform duration-150;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scale-hover:hover {
+    transform: scale(1.02);
+  }
+
+  /* Border draw animation helper */
+  .border-draw {
+    background: linear-gradient(to bottom, hsl(var(--primary)) 0%, hsl(var(--primary)) 100%);
+    background-size: 2px 0%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .border-draw-active {
+    background-size: 2px 100%;
+  }
+
+  /* Text hierarchy */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Focus ring - uses primary color */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Interactive element base - combine with specific hover */
+  .interactive {
+    @apply cursor-pointer select-none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom selection color */
+::selection {
+  background-color: hsl(180 99% 34% / 0.2);
+  color: hsl(220 13% 10%);
+}
