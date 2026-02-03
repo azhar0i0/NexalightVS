@@ -125,7 +125,7 @@ export default function Terms() {
               <h2 className="text-2xl font-bold text-foreground mb-4">Limitation of Liability</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE COMPANY WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST DATA, OR BUSINESS INTERRUPTION, ARISING OUT OF OR RELATED TO YOUR USE OF (OR INABILITY TO USE) THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. <br />
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL THE COMPANY’S TOTAL LIABILITY FOR ALL CLAIMS RELATED TO THE SERVICES EXCEED THE GREATER OF (A) $100 OR (B) THE AMOUNT YOU PAID TO US FOR USE OF THE SERVICES IN THE TWELVE (12) MONTHS BEFORE THE EVENT GIVING RISE TO THE CLAIM. (NOTE: IF YOU PAID NOTHING, THIS AMOUNT WILL BE $100.)
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL THE COMPANY’S TOTAL LIABILITY FOR ALL CLAIMS RELATED TO THE SERVICES EXCEED THE GREATER OF (A) $100 OR (B) THE AMOUNT YOU PAID TO US FOR USE OF THE SERVICES IN THE TWELVE (12) MONTHS BEFORE THE EVENT GIVING RISE TO THE CLAIM. <br /> (NOTE: IF YOU PAID NOTHING, THIS AMOUNT WILL BE $100.)
               </p>
             </AnimatedTextBlock>
 
@@ -203,7 +203,7 @@ export default function Terms() {
                 <li>Headings are for convenience and do not affect interpretation.</li>
               </ul>
             </AnimatedTextBlock>
-            
+
             {/* Contact Us */}
             <AnimatedTextBlock delay={1100}>
               <h2 className="text-2xl font-bold text-foreground mb-4">Contact Information</h2>
@@ -211,14 +211,14 @@ export default function Terms() {
                 Nexalight Virtual Solutions LLC
               </p>
               <ul className="list-none text-muted-foreground space-y-2 mt-4">
-                <li><strong>Email:</strong> [EMAIL_ADDRESS]</li>
+                <li><strong>Email:</strong> info@nexalightvs.com</li>
               </ul>
-              <ul className="list-none text-muted-foreground space-y-2 mt-4">
+              {/* <ul className="list-none text-muted-foreground space-y-2 mt-4">
                 <li><strong>Address:</strong> Indianapolis, IN 46204</li>
               </ul>
               <ul className="list-none text-muted-foreground space-y-2 mt-4">
                 <li><strong>Street:</strong> 123 Main Street</li>
-              </ul>
+              </ul> */}
               <ul className="list-none text-muted-foreground space-y-2 mt-4">
                 <li><strong>Attn:</strong> Website Terms</li>
               </ul>

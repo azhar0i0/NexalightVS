@@ -30,7 +30,7 @@ export default function Privacy() {
             <AnimatedTextBlock delay={100}>
               <h2 className="text-2xl font-bold text-foreground mb-4">1. Overview</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                This Privacy Policy explains how [LEGAL BUSINESS NAME] ("we," "us," "our," or the "Company") collects, uses, discloses, and protects information when you visit or use [WEBSITE NAME] (the "Site") and any related features (collectively, the "Services"). The Site is used to collect limited information for recruiting and pre‑screening purposes—specifically, to determine whether an individual appears to meet minimum requirements before being directed to a third‑party website to continue the application or onboarding process. <br />
+                his Privacy Policy explains how Nexalight Virtual Solutions LLC ("we," "us," "our," or the "Company") collects, uses, discloses, and protects information when you visit or use Nexalight (the "Site") and any related features (collectively, the "Services"). The Site is used to collect limited information for recruiting and pre‑screening purposes—specifically, to determine whether an individual appears to meet minimum requirements before being directed to a third‑party website to continue the application or onboarding process. <br />
                 By using the Services, you agree to this Privacy Policy. If you do not agree, please do not use the Services.
               </p>
             </AnimatedTextBlock>
@@ -193,7 +193,7 @@ export default function Privacy() {
               <ul className="list-none text-muted-foreground space-y-2 mt-4">
                 <li><strong>Nexalight Virtual Solutions LLC</strong></li>
                 <li><strong>Attn:</strong> Privacy</li>
-                <li><strong>Email:</strong> nexalightvs@gmail.com</li>
+                <li><strong>Email:</strong> info@nexalightvs.com</li>
               </ul>
             </AnimatedTextBlock>
           </div>

@@ -34,7 +34,7 @@ export default function Accessibility() {
               </p>
             </AnimatedTextBlock>
 
-            {/* Accessibility Standards We Aim to Follow */}  
+            {/* Accessibility Standards We Aim to Follow */}
             <AnimatedTextBlock delay={200}>
               <h2 className="text-2xl font-bold text-foreground mb-4">Accessibility Standards We Aim to Follow</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
@@ -110,7 +110,7 @@ export default function Accessibility() {
               <ul className="list-none text-muted-foreground space-y-2 mb-6">
                 <li><strong>Name:</strong> Nexalight Virtual Solutions</li>
                 <li><strong> Attn:</strong> Accessibility</li>
-                <li><strong>Email:</strong> [EMAIL_ADDRESS]</li>
+                <li><strong>Email:</strong> info@nexalightvs.com</li>
               </ul>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 Please include:
@@ -138,7 +138,7 @@ export default function Accessibility() {
             <AnimatedTextBlock delay={500}>
               <h2 className="text-2xl font-bold text-foreground mb-4">Assessment Methods</h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                We may evaluate the accessibility of our Site through methods such as:  
+                We may evaluate the accessibility of our Site through methods such as:
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-6">
                 <li>Self-evaluation and manual testing of key user flows (especially the pre-screening form).</li>

@@ -87,19 +87,19 @@ export function Footer() {
             </h2>
             <div className="space-y-2 text-sm">
               <a
-                href="mailto:nexalightvs@gmail.com"
+                href="mailto:info@nexalightvs.com"
                 className="block text-background/70 hover:text-primary transition-colors duration-150 ease-human w-fit focus-ring rounded-sm"
-                aria-label="Email us at nexalightvs@gmail.com"
+                aria-label="Email us at info@nexalightvs.com"
               >
-                nexalightvs@gmail.com
+                info@nexalightvs.com
               </a>
-              <a
+              {/* <a
                 href="tel:317-572-5034"
                 className="block text-background/70 hover:text-primary transition-colors duration-150 ease-human w-fit focus-ring rounded-sm"
                 aria-label="Call us at 317-572-5034"
               >
                 317-572-5034
-              </a>
+              </a> */}
             </div>
           </address>
         </div>

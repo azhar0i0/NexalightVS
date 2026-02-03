@@ -131,9 +131,9 @@ export default function Contact() {
               <address className="space-y-4 not-italic">
                 <AnimatedCard hoverScale={1.02} hoverY={-2}>
                   <a
-                    href="mailto:nexalightvs@gmail.com"
+                    href="mailto:info@nexalightvs.com"
                     className="flex items-center gap-4 p-4 rounded-2xl bg-surface hover:bg-surface/80 transition-colors duration-200 group focus-ring"
-                    aria-label="Email us at nexalightvs@gmail.com"
+                    aria-label="Email us at info@nexalightvs.com"
                   >
                     <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center" aria-hidden="true">
                       <Mail className="w-5 h-5 text-primary" />
@@ -141,13 +141,13 @@ export default function Contact() {
                     <div>
                       <div className="text-sm text-muted-foreground">Email</div>
                       <div className="font-medium text-foreground group-hover:text-primary transition-colors">
-                        nexalightvs@gmail.com
+                        info@nexalightvs.com
                       </div>
                     </div>
                   </a>
                 </AnimatedCard>
 
-                <AnimatedCard hoverScale={1.02} hoverY={-2}>
+                {/* <AnimatedCard hoverScale={1.02} hoverY={-2}>
                   <a
                     href="tel:317-572-5034"
                     className="flex items-center gap-4 p-4 rounded-2xl bg-surface hover:bg-surface/80 transition-colors duration-200 group focus-ring"
@@ -163,7 +163,7 @@ export default function Contact() {
                       </div>
                     </div>
                   </a>
-                </AnimatedCard>
+                </AnimatedCard> */}
 
                 <div className="flex items-center gap-4 p-4 rounded-2xl bg-surface">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center" aria-hidden="true">
