@@ -18,7 +18,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer 
+    <footer
       className="bg-foreground text-background"
       role="contentinfo"
       aria-label="Site footer"
@@ -27,8 +27,8 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4 lg:col-span-1">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="inline-block text-2xl font-bold tracking-tight focus-ring rounded-md"
               aria-label="Nexalight - Go to homepage"
             >
@@ -87,11 +87,11 @@ export function Footer() {
             </h2>
             <div className="space-y-2 text-sm">
               <a
-                href="mailto:azharisworking@gmail.com"
+                href="mailto:nexalightvs@gmail.com"
                 className="block text-background/70 hover:text-primary transition-colors duration-150 ease-human w-fit focus-ring rounded-sm"
-                aria-label="Email us at azharisworking@gmail.com"
+                aria-label="Email us at nexalightvs@gmail.com"
               >
-                azharisworking@gmail.com
+                nexalightvs@gmail.com
               </a>
               <a
                 href="tel:317-572-5034"
@@ -107,8 +107,8 @@ export function Footer() {
         {/* Arise Disclaimer */}
         <div className="mt-12 pt-8 border-t border-background/10">
           <p className="text-background/40 text-xs text-center max-w-3xl mx-auto leading-relaxed mb-6">
-            Nexalight Virtual Solutions is an Independent Business Owner (IBO) operating through the Arise platform. 
-            Arise is a third-party platform with its own terms and conditions. We do not guarantee employment or income. 
+            Nexalight Virtual Solutions is an Independent Business Owner (IBO) operating through the Arise platform.
+            Arise is a third-party platform with its own terms and conditions. We do not guarantee employment or income.
             All opportunities are subject to availability and Arise's requirements.
           </p>
         </div>

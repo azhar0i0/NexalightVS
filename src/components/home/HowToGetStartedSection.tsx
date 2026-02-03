@@ -150,7 +150,7 @@ export function HowToGetStartedSection() {
           >
             <Link
               to="/apply"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-primary text-primary-foreground font-semibold text-lg rounded-full transition-all duration-200 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 press-effect focus-ring group"
+              className="inline-flex items-center mt-[100px] gap-2 px-10 py-5 bg-primary text-primary-foreground font-semibold text-lg rounded-full transition-all duration-200 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 press-effect focus-ring group"
             >
               Start Your Application
               <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />

@@ -52,10 +52,10 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     setIsSubmitted(true);
     setIsSubmitting(false);
     setAnnouncement('Your message has been sent successfully. We will get back to you soon.');
@@ -67,13 +67,13 @@ export default function Contact() {
       <LiveRegion message={announcement} politeness="polite" />
 
       {/* Hero */}
-      <section 
+      <section
         className="py-20 md:py-32 bg-surface overflow-hidden"
         aria-labelledby="contact-heading"
       >
         <div className="container mx-auto px-6">
           <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <motion.span 
+            <motion.span
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -82,7 +82,7 @@ export default function Contact() {
             >
               Contact
             </motion.span>
-            <motion.h1 
+            <motion.h1
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: customEase }}
@@ -91,7 +91,7 @@ export default function Contact() {
             >
               Get in Touch
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -104,14 +104,14 @@ export default function Contact() {
       </section>
 
       {/* Contact Info + Form */}
-      <section 
+      <section
         className="py-20 md:py-32 bg-background overflow-hidden"
         aria-label="Contact information and form"
       >
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto grid gap-12 lg:grid-cols-2">
             {/* Contact Info */}
-            <motion.div 
+            <motion.div
               className="space-y-8"
               initial={prefersReducedMotion ? {} : { opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -123,7 +123,7 @@ export default function Contact() {
                   Contact Information
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Have questions about working with Nexalight Virtual Solutions? 
+                  Have questions about working with Nexalight Virtual Solutions?
                   We'd love to hear from you.
                 </p>
               </div>
@@ -131,9 +131,9 @@ export default function Contact() {
               <address className="space-y-4 not-italic">
                 <AnimatedCard hoverScale={1.02} hoverY={-2}>
                   <a
-                    href="mailto:azharisworking@gmail.com"
+                    href="mailto:nexalightvs@gmail.com"
                     className="flex items-center gap-4 p-4 rounded-2xl bg-surface hover:bg-surface/80 transition-colors duration-200 group focus-ring"
-                    aria-label="Email us at azharisworking@gmail.com"
+                    aria-label="Email us at nexalightvs@gmail.com"
                   >
                     <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center" aria-hidden="true">
                       <Mail className="w-5 h-5 text-primary" />
@@ -141,7 +141,7 @@ export default function Contact() {
                     <div>
                       <div className="text-sm text-muted-foreground">Email</div>
                       <div className="font-medium text-foreground group-hover:text-primary transition-colors">
-                        azharisworking@gmail.com
+                        nexalightvs@gmail.com
                       </div>
                     </div>
                   </a>
@@ -187,7 +187,7 @@ export default function Contact() {
               transition={{ duration: 0.6, delay: 0.1, ease: customEase }}
             >
               {isSubmitted ? (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5 }}
@@ -195,7 +195,7 @@ export default function Contact() {
                   role="status"
                   aria-live="polite"
                 >
-                  <motion.div 
+                  <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ duration: 0.4, delay: 0.2, type: 'spring' }}
@@ -211,8 +211,8 @@ export default function Contact() {
                   </p>
                 </motion.div>
               ) : (
-                <form 
-                  onSubmit={handleSubmit} 
+                <form
+                  onSubmit={handleSubmit}
                   className="bg-card border border-border rounded-3xl p-8 space-y-6"
                   aria-label="Contact form"
                   noValidate
@@ -320,14 +320,14 @@ export default function Contact() {
       </section>
 
       {/* When to Reach Out */}
-      <section 
+      <section
         className="py-20 md:py-32 bg-surface overflow-hidden"
         aria-labelledby="when-to-reach-heading"
       >
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <AnimatedSection className="text-center mb-12">
-              <h2 
+              <h2
                 id="when-to-reach-heading"
                 className="text-2xl md:text-3xl font-bold text-foreground"
               >
@@ -343,7 +343,7 @@ export default function Contact() {
                 const Icon = reason.icon;
                 return (
                   <StaggerItem key={index}>
-                    <AnimatedCard 
+                    <AnimatedCard
                       className="bg-card border border-border rounded-2xl p-6 text-center h-full hover:border-primary/30 transition-colors duration-300"
                       hoverScale={1.02}
                       hoverY={-4}
@@ -367,12 +367,12 @@ export default function Contact() {
       </section>
 
       {/* Response Commitment */}
-      <section 
+      <section
         className="py-16 bg-background overflow-hidden"
         aria-labelledby="response-commitment-heading"
       >
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -383,14 +383,14 @@ export default function Contact() {
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4" aria-hidden="true">
                 <Clock className="w-5 h-5 text-primary" />
               </div>
-              <h3 
+              <h3
                 id="response-commitment-heading"
                 className="text-xl font-semibold text-foreground mb-3"
               >
                 Our Response Commitment
               </h3>
               <p className="text-muted-foreground">
-                We aim to respond to all inquiries within <span className="text-foreground font-medium">1-2 business days</span>. 
+                We aim to respond to all inquiries within <span className="text-foreground font-medium">1-2 business days</span>.
                 For urgent matters, please call us directly.
               </p>
             </article>

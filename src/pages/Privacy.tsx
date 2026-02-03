@@ -193,7 +193,7 @@ export default function Privacy() {
               <ul className="list-none text-muted-foreground space-y-2 mt-4">
                 <li><strong>Nexalight Virtual Solutions LLC</strong></li>
                 <li><strong>Attn:</strong> Privacy</li>
-                <li><strong>Email:</strong> azharisworking@gmail.com</li>
+                <li><strong>Email:</strong> nexalightvs@gmail.com</li>
               </ul>
             </AnimatedTextBlock>
           </div>

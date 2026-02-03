@@ -109,17 +109,42 @@ export default function Apply() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    // 1. Validate first
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
-    // Simulate form submission (frontend only for now)
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    setAnnouncement('Your application has been submitted successfully! Please check your email for next steps.');
+
+    // 2. Prepare the payload
+    // Note: Since you are using the /ajax/ endpoint, sending a JSON object 
+    // is usually cleaner than FormData, but FormSubmit supports both.
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@nexalightvs.com", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New Application: ${formData.fullName}`,
+          _autoresponse: "Thanks for contacting NexaLight VS! We've received your application.",
+          _captcha: "false"
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setAnnouncement('Application submitted successfully!');
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setAnnouncement('There was an error submitting the form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const updateField = <K extends keyof FormData>(field: K, value: FormData[K]) => {
@@ -135,13 +160,13 @@ export default function Apply() {
       <LiveRegion message={announcement} politeness="polite" />
 
       {/* Hero */}
-      <section 
+      <section
         className="py-20 md:py-28 bg-surface overflow-hidden"
         aria-labelledby="apply-heading"
       >
         <div className="container mx-auto px-6">
           <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -149,7 +174,7 @@ export default function Apply() {
             >
               Pre-Screening Application
             </motion.span>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -158,7 +183,7 @@ export default function Apply() {
             >
               Start Your Journey with Nexalight
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -203,7 +228,7 @@ export default function Apply() {
       </section>
 
       {/* Application Form */}
-      <section 
+      <section
         className="py-20 md:py-28 bg-surface"
         aria-labelledby="form-heading"
       >
@@ -219,7 +244,7 @@ export default function Apply() {
             </AnimatedSection>
 
             {isSubmitted ? (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
@@ -227,7 +252,7 @@ export default function Apply() {
                 role="status"
                 aria-live="polite"
               >
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.4, delay: 0.2, type: 'spring' }}
@@ -252,11 +277,11 @@ export default function Apply() {
                 </div>
               </motion.div>
             ) : (
-              <motion.form 
+              <motion.form
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                onSubmit={handleSubmit} 
+                onSubmit={handleSubmit}
                 className="bg-card border border-border rounded-3xl p-8 md:p-10 space-y-8"
                 aria-label="Pre-screening application form"
                 noValidate
@@ -339,7 +364,7 @@ export default function Apply() {
                     value={formData.country}
                     onValueChange={(value) => updateField('country', value)}
                   >
-                    <SelectTrigger 
+                    <SelectTrigger
                       id="country"
                       aria-invalid={!!errors.country}
                       className="w-full px-4 py-3 h-auto rounded-2xl border border-input bg-background text-foreground focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all duration-150"
@@ -396,7 +421,7 @@ export default function Apply() {
                     value={formData.experience}
                     onValueChange={(value) => updateField('experience', value)}
                   >
-                    <SelectTrigger 
+                    <SelectTrigger
                       id="experience"
                       aria-invalid={!!errors.experience}
                       className="w-full px-4 py-3 h-auto rounded-2xl border border-input bg-background text-foreground focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all duration-150"
@@ -431,7 +456,7 @@ export default function Apply() {
                     value={formData.computerType}
                     onValueChange={(value) => updateField('computerType', value)}
                   >
-                    <SelectTrigger 
+                    <SelectTrigger
                       id="computerType"
                       aria-invalid={!!errors.computerType}
                       className="w-full px-4 py-3 h-auto rounded-2xl border border-input bg-background text-foreground focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all duration-150"
@@ -466,7 +491,7 @@ export default function Apply() {
                     value={formData.internetSpeed}
                     onValueChange={(value) => updateField('internetSpeed', value)}
                   >
-                    <SelectTrigger 
+                    <SelectTrigger
                       id="internetSpeed"
                       aria-invalid={!!errors.internetSpeed}
                       className="w-full px-4 py-3 h-auto rounded-2xl border border-input bg-background text-foreground focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all duration-150"
@@ -501,6 +526,17 @@ export default function Apply() {
                     Submitting this form does not guarantee employment. All opportunities are subject to availability and Arise's requirements.
                   </p>
                 </div>
+
+                {/* Auto-response email to user */}
+                <input
+                  type="hidden"
+                  name="_autoresponse"
+                  value="Thanks for contacting NexaLight VS! We’ve received your application and will get back to you shortly."
+                />
+
+                {/* Disable captcha if you want */}
+                <input type="hidden" name="_captcha" value="false" />
+
 
                 {/* Submit Button */}
                 <motion.button
