@@ -270,8 +270,8 @@ export default function Apply() {
                   <h4 className="font-semibold text-foreground mb-3">What's Next?</h4>
                   <ol className="space-y-2 text-sm text-muted-foreground list-decimal pl-4">
                     <li>Check your email for a welcome message from Nexalight</li>
-                    <li>Register at <a href="https://register.arise.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">register.arise.com</a></li>
-                    <li>Use our IBO ID: <strong className="text-foreground">1221827</strong> when registering</li>
+                    <li>Register at <a href="https://register.arise.com/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Arise Company</a></li>
+                    {/* <li>Use our IBO ID: <strong className="text-foreground">1221827</strong> when registering</li> */}
                     <li>Complete the Arise onboarding process</li>
                   </ol>
                 </div>
@@ -528,11 +528,11 @@ export default function Apply() {
                 </div>
 
                 {/* Auto-response email to user */}
-                <input
+                {/* <input
                   type="hidden"
                   name="_autoresponse"
                   value="Thanks for contacting NexaLight VS! We’ve received your application and will get back to you shortly."
-                />
+                /> */}
 
                 {/* Disable captcha if you want */}
                 <input type="hidden" name="_captcha" value="false" />
