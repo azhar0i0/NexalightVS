@@ -155,7 +155,7 @@ export function HowToGetStartedSection() {
               Start Your Application
               <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </Link>
-            <motion.p 
+            {/* <motion.p 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -163,7 +163,7 @@ export function HowToGetStartedSection() {
               className="mt-6 text-sm text-muted-foreground"
             >
               Nexalight IBO ID: 1221827 • Register at Arise.com
-            </motion.p>
+            </motion.p> */}
           </motion.div>
         </div>
       </div>

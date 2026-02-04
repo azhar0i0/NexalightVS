@@ -37,9 +37,9 @@ export function Footer() {
             <p className="text-background/70 text-sm max-w-xs leading-relaxed">
               Legitimate remote call center opportunities through our partnership with the Arise platform.
             </p>
-            <p className="text-background/50 text-sm">
+            {/* <p className="text-background/50 text-sm">
               IBO ID: 1221827
-            </p>
+            </p> */}
           </div>
 
           {/* Navigation Links */}

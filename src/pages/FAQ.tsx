@@ -19,7 +19,7 @@ const generalFaqs = [
   },
   {
     question: 'What is the Arise platform?',
-    answer: 'Arise is a virtual services platform that connects customer service professionals with Fortune 500 companies. Nexalight partners with Arise (IBO ID: 1221827) to offer remote customer support opportunities.',
+    answer: 'Arise is a virtual services platform that connects customer service professionals with Fortune 500 companies. Nexalight partners with Arise to offer remote customer support opportunities.',
   },
   {
     question: 'Do I need prior call center experience?',
@@ -30,7 +30,7 @@ const generalFaqs = [
 const processFaqs = [
   {
     question: 'How do I get started?',
-    answer: 'Start by completing our pre-screening form. If you qualify, we\'ll send you instructions to register at register.arise.com using our IBO ID: 1221827. From there, you\'ll complete Arise\'s onboarding and certification process.',
+    answer: 'Start by completing our pre-screening form. If you qualify, we\'ll send you instructions to register at Arise. From there, you\'ll complete Arise\'s onboarding and certification process.',
   },
   {
     question: 'Is training paid?',

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
-import { AnimatedSection, StaggerContainer, StaggerItem, AnimatedCard } from '@/components/ui/AnimatedSection';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Check, ArrowRight, AlertCircle, Laptop, Wifi, User, Globe, Clock, Headphones } from 'lucide-react';
+import { AnimatedSection } from '@/components/ui/AnimatedSection';
+import { Check, ArrowRight, AlertCircle, Laptop, Wifi, User, Globe } from 'lucide-react';
 import { LiveRegion } from '@/components/ui/LiveRegion';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -15,6 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { z } from 'zod';
+import BasicRequirements from '@/components/applyNow/BasicRequirements';
 
 // Form validation schema
 const formSchema = z.object({
@@ -64,13 +64,6 @@ const experienceLevels = [
   { value: 'no', label: 'No, but I am eager to learn' },
 ];
 
-const requirements = [
-  { icon: Laptop, text: 'Desktop or laptop computer (no tablets)' },
-  { icon: Wifi, text: 'Reliable high-speed internet connection' },
-  { icon: Headphones, text: 'USB headset with microphone' },
-  { icon: Clock, text: 'Quiet, dedicated workspace' },
-];
-
 export default function Apply() {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -110,14 +103,30 @@ export default function Apply() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Validate first
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // 2. Prepare the payload
-    // Note: Since you are using the /ajax/ endpoint, sending a JSON object 
-    // is usually cleaner than FormData, but FormSubmit supports both.
+    const payload = {
+      // 1. THIS MUST BE NAMED "email" FOR AUTORESPONSE TO WORK
+      email: formData.email,
+
+      // 2. The custom message sent back to the user
+      _autoresponse: "Welcome to NexaLight Virtual Solutions! We have received your application and our team will review it shortly. Keep an eye on your inbox for next steps!",
+
+      // 3. Allows YOU to reply directly to the user from your email client
+      _replyto: formData.email,
+
+      // 4. Other configuration
+      _subject: `New Application: ${formData.fullName}`,
+      _template: "table",
+      _captcha: "false",
+
+      // 5. The rest of your data
+      ...formData,
+      "Full Name": formData.fullName, // Explicitly naming for the email table
+    };
+
     try {
       const response = await fetch("https://formsubmit.co/ajax/info@nexalightvs.com", {
         method: "POST",
@@ -125,12 +134,7 @@ export default function Apply() {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          ...formData,
-          _subject: `New Application: ${formData.fullName}`,
-          _autoresponse: "Thanks for contacting NexaLight VS! We've received your application.",
-          _captcha: "false"
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -140,8 +144,7 @@ export default function Apply() {
         throw new Error('Form submission failed');
       }
     } catch (error) {
-      console.error("Form submission error:", error);
-      setAnnouncement('There was an error submitting the form. Please try again.');
+      setAnnouncement('There was an error submitting. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -195,37 +198,8 @@ export default function Apply() {
         </div>
       </section>
 
-      {/* Requirements Section */}
-      <section className="py-16 md:py-20 bg-background" aria-labelledby="requirements-heading">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <AnimatedSection className="text-center mb-12">
-              <h2 id="requirements-heading" className="text-2xl md:text-3xl font-bold text-foreground">
-                Basic Requirements
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                Before applying, make sure you meet these basic requirements:
-              </p>
-            </AnimatedSection>
-
-            <StaggerContainer className="grid gap-4 md:grid-cols-2">
-              {requirements.map((req, index) => {
-                const Icon = req.icon;
-                return (
-                  <StaggerItem key={index}>
-                    <AnimatedCard className="flex items-center gap-4 p-4 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-5 h-5 text-primary" />
-                      </div>
-                      <span className="text-foreground">{req.text}</span>
-                    </AnimatedCard>
-                  </StaggerItem>
-                );
-              })}
-            </StaggerContainer>
-          </div>
-        </div>
-      </section>
+      {/* Basic Requirments */}
+      <BasicRequirements />
 
       {/* Application Form */}
       <section
@@ -526,17 +500,6 @@ export default function Apply() {
                     Submitting this form does not guarantee employment. All opportunities are subject to availability and Arise's requirements.
                   </p>
                 </div>
-
-                {/* Auto-response email to user */}
-                {/* <input
-                  type="hidden"
-                  name="_autoresponse"
-                  value="Thanks for contacting NexaLight VS! We’ve received your application and will get back to you shortly."
-                /> */}
-
-                {/* Disable captcha if you want */}
-                <input type="hidden" name="_captcha" value="false" />
-
 
                 {/* Submit Button */}
                 <motion.button

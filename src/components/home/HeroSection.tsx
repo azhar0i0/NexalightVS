@@ -149,14 +149,14 @@ export function HeroSection() {
             </motion.div>
 
             {/* Trust indicator */}
-            <motion.p
+            {/* <motion.p
               initial={prefersReducedMotion ? {} : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
               className="mt-8 text-sm text-muted-foreground"
             >
               Partnered with Arise • IBO ID: 1221827
-            </motion.p>
+            </motion.p> */}
           </motion.div>
 
           {/* Right: Abstract Editorial Shape */}
