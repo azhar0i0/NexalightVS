@@ -3,7 +3,7 @@ import emailjs from "emailjs-com";
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { Check, ArrowRight, AlertCircle, Laptop, Wifi, User, Globe } from 'lucide-react';
+import { Check, ArrowRight, AlertCircle, Laptop, User, Globe } from 'lucide-react';
 import { LiveRegion } from '@/components/ui/LiveRegion';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -17,16 +17,84 @@ import {
 import { z } from 'zod';
 import BasicRequirements from '@/components/applyNow/BasicRequirements';
 
+// states and provinces for each country (for potential future use in a dependent dropdown)
+const countryStateMap: Record<string, string[]> = {
+  'United States': [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Michigan',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Mexico',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Virginia',
+    'West Virginia',
+    'Wyoming',
+  ],
+  Canada: [
+    'Ontario',
+    'Quebec',
+    'British Columbia',
+    'Alberta',
+  ],
+  'United Kingdom': [
+    'England',
+    'Scotland',
+    'Wales',
+    'Northern Ireland',
+  ],
+  Jamaica: [],
+  India: [
+    'Delhi',
+    'Maharashtra',
+    'Tamil Nadu',
+    'Karnataka',
+  ],
+};
+
 // Form validation schema
 const formSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters').max(100, 'Full name must be less than 100 characters'),
   email: z.string().email('Please enter a valid email address'),
   phone: z.string().optional(),
   country: z.string().min(1, 'Please select your country'),
+  state: z.string().optional(),
   ageConfirmed: z.boolean().refine(val => val === true, 'You must confirm you are 18 or older'),
   experience: z.string().min(1, 'Please select your experience level'),
   computerType: z.string().min(1, 'Please select your computer type'),
-  internetSpeed: z.string().min(1, 'Please select your internet speed'),
+  // internetSpeed: z.string().min(1, 'Please select your internet speed'),
+}).superRefine((data, ctx) => {
+  if (countryStateMap[data.country]?.length > 0 && !data.state) {
+    ctx.addIssue({
+      path: ['state'],
+      message: 'Please select your state/province',
+      code: z.ZodIssueCode.custom,
+    });
+  }
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -36,13 +104,10 @@ const countries = [
   'United States',
   'Canada',
   'United Kingdom',
-  'Australia',
-  'Philippines',
-  'India',
   'Jamaica',
-  'Trinidad and Tobago',
-  'Other',
+  'India'
 ];
+
 
 const computerTypes = [
   { value: 'desktop', label: 'Desktop Computer' },
@@ -71,10 +136,11 @@ export default function Apply() {
     email: '',
     phone: '',
     country: '',
+    state: '',
     ageConfirmed: false,
     experience: '',
     computerType: '',
-    internetSpeed: '',
+    // internetSpeed: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -115,6 +181,7 @@ export default function Apply() {
       "Email Address": formData.email,
       "Phone": formData.phone || "Not Provided",
       "Country": formData.country,
+      "State/Province": formData.state,
       "18 or Older": formData.ageConfirmed ? "Yes" : "No", // Converts 'true' to 'Yes'
       "Experience": experienceLevels.find(l => l.value === formData.experience)?.label,
       "Computer": computerTypes.find(c => c.value === formData.computerType)?.label,
@@ -355,7 +422,10 @@ export default function Apply() {
                   </Label>
                   <Select
                     value={formData.country}
-                    onValueChange={(value) => updateField('country', value)}
+                    onValueChange={(value) => {
+                      updateField('country', value);
+                      updateField('state', '');
+                    }}
                   >
                     <SelectTrigger
                       id="country"
@@ -382,6 +452,50 @@ export default function Apply() {
                     </p>
                   )}
                 </div>
+
+                {/* State / Province */}
+                {countryStateMap[formData.country]?.length > 0 && (
+                  <div>
+                    <Label htmlFor="state" className="block text-sm font-medium text-foreground mb-2">
+                      State / Province <span className="text-destructive">*</span>
+                    </Label>
+
+                    <Select
+                      value={formData.state}
+                      onValueChange={(value) => updateField('state', value)}
+                    >
+                      <SelectTrigger
+                        id="state"
+                        aria-invalid={!!errors.state}
+                        className="w-full px-4 py-3 h-auto rounded-2xl border border-input bg-background text-foreground focus:ring-2 focus:ring-primary focus:ring-offset-0 transition-all duration-150"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Globe className="w-4 h-4 text-muted-foreground" />
+                          <SelectValue placeholder="Select your state / province" />
+                        </div>
+                      </SelectTrigger>
+
+                      <SelectContent className="rounded-2xl border border-border bg-popover shadow-lg">
+                        {countryStateMap[formData.country].map((state) => (
+                          <SelectItem
+                            key={state}
+                            value={state}
+                            className="rounded-xl cursor-pointer focus:bg-primary/10"
+                          >
+                            {state}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    {errors.state && (
+                      <p className="mt-2 text-sm text-destructive flex items-center gap-1" role="alert">
+                        <AlertCircle className="w-4 h-4" />
+                        {errors.state}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 {/* Age Confirmation */}
                 <div className="flex items-start gap-3 p-4 bg-surface rounded-2xl border border-border">
