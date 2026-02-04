@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from "emailjs-com";
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/layout/Layout';
 import { AnimatedSection } from '@/components/ui/AnimatedSection';
@@ -107,44 +108,62 @@ export default function Apply() {
 
     setIsSubmitting(true);
 
+    // 1. Prepare the data: Convert Booleans to "Yes" for the email table
+    // and ensure we don't have duplicate keys.
+    const submissionData = {
+      "Full Name": formData.fullName,
+      "Email Address": formData.email,
+      "Phone": formData.phone || "Not Provided",
+      "Country": formData.country,
+      "18 or Older": formData.ageConfirmed ? "Yes" : "No", // Converts 'true' to 'Yes'
+      "Experience": experienceLevels.find(l => l.value === formData.experience)?.label,
+      "Computer": computerTypes.find(c => c.value === formData.computerType)?.label,
+      "Internet Speed": internetSpeeds.find(s => s.value === formData.internetSpeed)?.label,
+    };
+
     const payload = {
-      // 1. THIS MUST BE NAMED "email" FOR AUTORESPONSE TO WORK
-      email: formData.email,
-
-      // 2. The custom message sent back to the user
-      _autoresponse: "Welcome to NexaLight Virtual Solutions! We have received your application and our team will review it shortly. Keep an eye on your inbox for next steps!",
-
-      // 3. Allows YOU to reply directly to the user from your email client
-      _replyto: formData.email,
-
-      // 4. Other configuration
+      _replyto: formData.email, // sender email
+      _autoresponse: "Welcome to NexaLight Virtual Solutions! We have received your application...",
       _subject: `New Application: ${formData.fullName}`,
       _template: "table",
       _captcha: "false",
 
-      // 5. The rest of your data
-      ...formData,
-      "Full Name": formData.fullName, // Explicitly naming for the email table
+      ...submissionData
     };
 
     try {
+      // 1️⃣ Send to ADMIN (FormSubmit)
       const response = await fetch("https://formsubmit.co/ajax/info@nexalightvs.com", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        setAnnouncement('Application submitted successfully!');
-      } else {
-        throw new Error('Form submission failed');
+      if (!response.ok) {
+        throw new Error("Admin submission failed");
       }
+
+      // 2️⃣ Send confirmation to USER (EmailJS)
+      await emailjs.send(
+        "service_5fq3xhl", // YOUR Service ID
+        "template_4uvtbiq", // YOUR TEMPLATE ID
+        {
+          full_name: formData.fullName,
+          email: formData.email,
+        },
+        "ANj0gy8ydQPZUtvUc" // YOUR PUBLIC KEY
+      );
+
+      // 3️⃣ Success UI
+      setIsSubmitted(true);
+      setAnnouncement("Application submitted successfully!");
+
     } catch (error) {
-      setAnnouncement('There was an error submitting. Please try again.');
+      console.error(error);
+      setAnnouncement("There was an error submitting. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
