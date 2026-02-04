@@ -50,14 +50,14 @@ const computerTypes = [
   { value: 'both', label: 'Both Desktop and Laptop' },
 ];
 
-const internetSpeeds = [
-  { value: 'under-10', label: 'Under 10 Mbps' },
-  { value: '10-25', label: '10-25 Mbps' },
-  { value: '25-50', label: '25-50 Mbps' },
-  { value: '50-100', label: '50-100 Mbps' },
-  { value: 'over-100', label: 'Over 100 Mbps' },
-  { value: 'unsure', label: "I'm not sure" },
-];
+// const internetSpeeds = [
+//   { value: 'under-10', label: 'Under 10 Mbps' },
+//   { value: '10-25', label: '10-25 Mbps' },
+//   { value: '25-50', label: '25-50 Mbps' },
+//   { value: '50-100', label: '50-100 Mbps' },
+//   { value: 'over-100', label: 'Over 100 Mbps' },
+//   { value: 'unsure', label: "I'm not sure" },
+// ];
 
 const experienceLevels = [
   { value: 'yes', label: 'Yes, I have customer service experience' },
@@ -118,7 +118,7 @@ export default function Apply() {
       "18 or Older": formData.ageConfirmed ? "Yes" : "No", // Converts 'true' to 'Yes'
       "Experience": experienceLevels.find(l => l.value === formData.experience)?.label,
       "Computer": computerTypes.find(c => c.value === formData.computerType)?.label,
-      "Internet Speed": internetSpeeds.find(s => s.value === formData.internetSpeed)?.label,
+      // "Internet Speed": internetSpeeds.find(s => s.value === formData.internetSpeed)?.label,
     };
 
     const payload = {
@@ -476,7 +476,7 @@ export default function Apply() {
                 </div>
 
                 {/* Internet Speed */}
-                <div>
+                {/* <div>
                   <Label htmlFor="internetSpeed" className="block text-sm font-medium text-foreground mb-2">
                     Estimated internet speed <span className="text-destructive">*</span>
                   </Label>
@@ -508,7 +508,7 @@ export default function Apply() {
                       {errors.internetSpeed}
                     </p>
                   )}
-                </div>
+                </div> */}
 
                 {/* Disclaimer */}
                 <div className="p-4 bg-surface/50 border border-border rounded-2xl text-sm text-muted-foreground">

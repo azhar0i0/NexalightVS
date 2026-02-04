@@ -95,7 +95,7 @@ export function HeroSection() {
               <br />
               <span className="text-primary">Work From Home.</span>
               <br />
-              Get Paid.
+              Get Paid!
             </motion.h1>
 
             {/* Subheadline */}
